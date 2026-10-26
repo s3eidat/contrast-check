@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' data: blob:; connect-src 'self' data: blob:; worker-src 'self' blob:; manifest-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Contrast Check — Free WCAG Color Contrast Checker | S3eidat Tools</title>
+<meta name="description" content="Check text and background colors against WCAG 2 AA and AAA for normal text, large text and UI components. Live sample, swap, and a one-click fix that finds the nearest passing color. Free and private.">
+<meta property="og:title" content="Contrast Check — WCAG color contrast checker">
+<meta property="og:description" content="Contrast ratio, AA/AAA results and the nearest passing color. Runs in your browser.">
+<meta property="og:image" content="screenshot.png">
+<link rel="icon" href="kit/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="kit/kit.css">
+<link rel="stylesheet" href="app.css">
+<script src="kit/kit.js"></script>
+</head>
+<body data-tool="contrast-check">
+<main class="s3-main">
+  <section class="s3-hero">
+    <h1>Contrast Check</h1>
+    <p>Is your text readable? Check any two colors against WCAG 2 AA and AAA, see them live, and let the tool find the nearest color that passes.</p>
+  </section>
+
+  <div class="grid-2 ct-grid">
+    <section class="card stack">
+      <div class="pair">
+        <label class="field">Text color
+          <span class="cin"><input type="color" id="fg-pick" aria-label="Pick text color"><input class="input mono" id="fg" autocomplete="off" spellcheck="false" dir="ltr"></span>
+        </label>
+        <button class="btn icon swap" id="swap" aria-label="Swap colors" title="Swap colors">⇅</button>
+        <label class="field">Background
+          <span class="cin"><input type="color" id="bg-pick" aria-label="Pick background color"><input class="input mono" id="bg" autocomplete="off" spellcheck="false" dir="ltr"></span>
+        </label>
+      </div>
+      <p class="faint err" id="err" role="alert"></p>
+
+      <div class="ratio-box">
+        <div><b class="ratio" id="ratio">—</b><span class="faint">contrast ratio</span></div>
+        <span class="chip big-chip" id="grade"></span>
+      </div>
+      <div class="results" id="results"></div>
+      <p class="faint" id="alpha-note" hidden>The text color is semi-transparent, so it is blended over the background first.</p>
+    </section>
+
+    <section class="card stack">
+      <div class="sample" id="sample">
+        <span class="s-large" id="s-large"></span>
+        <span class="s-normal" id="s-normal"></span>
+        <span class="s-small">Small print at 12px is the hardest to read.</span>
+        <span class="s-ui"><span class="s-btn">Button</span><span class="s-field">Input field</span><svg class="s-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
+      </div>
+      <label class="field">Sample text
+        <input class="input" id="sample-text" dir="auto" autocomplete="off" value="The quick brown fox jumps over the lazy dog">
+      </label>
+      <div class="fix">
+        <div class="row between">
+          <h2>Suggest a passing color</h2>
+          <select class="select mini" id="target" aria-label="Target level">
+            <option value="4.5">AA normal text (4.5:1)</option>
+            <option value="3">AA large text / UI (3:1)</option>
+            <option value="7">AAA normal text (7:1)</option>
+          </select>
+        </div>
+        <p class="faint">Keeps the hue and changes only the lightness, by the smallest step that passes.</p>
+        <div class="row">
+          <button class="btn primary small" id="fix-fg">Fix text color</button>
+          <button class="btn small" id="fix-bg">Fix background</button>
+          <span class="faint" id="fix-msg" aria-live="polite"></span>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
